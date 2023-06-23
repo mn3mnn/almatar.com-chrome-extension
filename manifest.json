@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Almatar Extension",
+  "version": "1.0",
+  "description": "A Chrome extension to fill out a form with saved person data.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "almatar_ar.png"
+  },
+  "permissions": [
+    "tabs",
+    "scripting",
+    "activeTab"
+  ]
+
+}
