@@ -16,35 +16,6 @@ button {
     cursor: pointer;
 }
 
-.input-container {
-    margin-bottom: 10px;
-    width: 500px;
-}
-
-.input-container label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.input-container input {
-    width: 100%;
-    padding: 5px;
-}
-
-a {
-    display: block;
-    margin-bottom: 5px;
-    color: #1e90ff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-p {
-    margin: 0;
-}
 
 body {
     width: 300px;
@@ -54,6 +25,16 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+}
+
+.dropdown-container{
+
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-input{
+    margin-right: 10px;
 }
 
 label {
@@ -88,6 +69,17 @@ select:focus {
     box-shadow: 0 0 5px #4CAF50;
 }
 
+.search-input{
+    margin-bottom: 25px;
+    height: 15px;
+
+}
+
+.personFormNumber{
+    margin-right: 20px;
+    width: 35px;
+}
+
 .person-container {
     display: flex;
     align-items: center;
@@ -96,8 +88,14 @@ select:focus {
 
 .person-name {
     font-weight: bold;
+    font-size: 15px;
     margin-right: 10px;
     width: 170px;
+}
+
+.save-button {
+    margin-left: 200px;
+    margin-top: 20px;
 }
 
 .view-button,
