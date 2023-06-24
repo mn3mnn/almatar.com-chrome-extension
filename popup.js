@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     addPersonBtn.addEventListener('click', function() {
         showAddPersonForm();
-        document.querySelector('body').style.width = '550px';
+        document.querySelector('body').style.width = '570px';
     });
 
     fillFormBtn.addEventListener('click', function() {
@@ -14,19 +14,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Function to display the form for adding a new person
-    function showAddPersonForm() {
+    function showAddPersonForm(person = null) {
         clearPopupContent();
         var form = createPersonForm();
         var saveButton = createSaveButton();
+        var person_id = null;
+
+        if (!person){  // if person is null, then it's a new person
+            person_id = Date.now();
+        }
+        else{
+            person_id = person.id;
+        }
 
         saveButton.addEventListener('click', function() {
             var personData = {
+                id: person_id,
                 firstName: document.getElementById('firstName').value,
                 lastName: document.getElementById('lastName').value,
                 email: document.getElementById('email').value,
-                dayBirthdate: document.getElementById('dayBd').value,
-                monthBirthdate: document.getElementById('monthBd').value,
-                yearBirthdate: document.getElementById('yearBd').value,
+                dayBirthdate: document.getElementById('dayBirthdate').value,
+                monthBirthdate: document.getElementById('monthBirthdate').value,
+                yearBirthdate: document.getElementById('yearBirthdate').value,
                 nationality: document.getElementById('nationality').value,
                 country: document.getElementById('country').value,
                 passportNumber: document.getElementById('passportNumber').value,
@@ -43,6 +52,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         appendToPopup(form);
+        if (person){  // if person is not null, then it's an existing person to be edited
+            fillAddPersonForm(person);
+        }
         appendToPopup(saveButton);
     }
 
@@ -123,11 +135,11 @@ document.addEventListener('DOMContentLoaded', function() {
             emailInput.id = 'email';
 
             const dayDropdown = createDropdownList(dayOptions);
-            dayDropdown.id = 'dayBd';
+            dayDropdown.id = 'dayBirthdate';
             const monthDropdown = createDropdownList(monthOptions);
-            monthDropdown.id = 'monthBd';
+            monthDropdown.id = 'monthBirthdate';
             const yearDropdown = createDropdownList(yearOptions);
-            yearDropdown.id = 'yearBd';
+            yearDropdown.id = 'yearBirthdate';
 
             const nationalityDropdown = createDropdownList(nationalityOptions);
             nationalityDropdown.id = 'nationality';
@@ -194,9 +206,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Function to save the person data
-    function savePersonData(personData) {
+    function savePersonData(person) {
         var savedPersons = JSON.parse(localStorage.getItem('savedPersons')) || [];
-        savedPersons.push(personData);
+        // update the savedPersons array with the new person, replace the old one if it exists
+        var personIndex = savedPersons.findIndex(function (savedPerson) {
+            return savedPerson.id === person.id;
+        });
+        if (personIndex > -1) {
+            savedPersons[personIndex] = person;
+        }
+        else {
+            savedPersons.push(person);
+        }
         localStorage.setItem('savedPersons', JSON.stringify(savedPersons));
     }
 
@@ -226,6 +247,10 @@ document.addEventListener('DOMContentLoaded', function() {
             viewButton.className = 'view-button';
             viewButton.textContent = 'View';
 
+            var editButton = document.createElement('button');
+            editButton.className = 'view-button';
+            editButton.textContent = 'Edit';
+
             var delButton = document.createElement('button');
             delButton.className = 'del-button';
             delButton.textContent = 'Delete';
@@ -233,17 +258,22 @@ document.addEventListener('DOMContentLoaded', function() {
             personContainer.appendChild(personName);
             personContainer.appendChild(personNumberInput);
             personContainer.appendChild(viewButton);
+            personContainer.appendChild(editButton);
             personContainer.appendChild(delButton);
 
             viewButton.addEventListener('click', function () {
                 fillFormWithData(person, index);
             });
 
+            editButton.addEventListener('click', function () {
+                showAddPersonForm(person);
+            });
+
             delButton.addEventListener('click', function () {
                 // get and delete this person from the savedPersons array by name
                 var savedPersons = JSON.parse(localStorage.getItem('savedPersons')) || [];
                 var personIndex = savedPersons.findIndex(function (savedPerson) {
-                    return savedPerson.firstName === person.firstName && savedPerson.lastName === person.lastName;
+                    return person.id === savedPerson.id;
                 }
                 );
                 savedPersons.splice(personIndex, 1);
@@ -454,5 +484,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
         return message;
     }
+
+    function fillAddPersonForm(person) {
+        // fill the form in the extension with the person data
+        let IDs = ['firstName', 'lastName', 'passportNumber', 'phoneNumber', 'email', 'country', 'nationality',
+            'dayBirthdate', 'monthBirthdate', 'yearBirthdate',
+            'dayPassportExpDate', 'monthPassportExpDate', 'yearPassportExpDate'];
+
+        for (let i = 0; i < IDs.length; i++) {
+            try {
+                let input = document.getElementById(IDs[i]);
+                input.value = person[IDs[i]];
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+
 });
 
