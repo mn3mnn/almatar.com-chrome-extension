@@ -13,22 +13,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Data for dropdown options
     const dayOptions = Array.from({ length: 31 }, (_, i) => String(i + 1).padStart(2, '0'));
     const monthOptions = [
-        ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
-        ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    ];
+        "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     const yearOptions = Array.from({ length: 101 }, (_, i) => String(1911 + i));
     const yearOptions2 = Array.from({ length: 60 }, (_, i) => String(2023 + i));
 
     const nationalityOptions = [
-        ['سعودي', 'إماراتي', 'بحريني', 'كويتي', 'دولة قطر', 'عماني', 'مصري', 'سنغافوري', 'سويدي', 'سوداني', 'جزر سليمان', 'فلبيني', 'روسي', 'صربي', 'روماني', 'برتغالي', 'بورتوريكو', 'بولندي', 'باكستاني', 'بيروفي', 'بابواني', 'بولينزي', 'سوري', 'نيوزيلاندي', 'نرويجي', 'هولندي', 'نيجيري', 'نيجري', 'كاليدوني', 'نامبي', 'موزنبيقي', 'ماليزي', 'مكسيكي', 'مالاوني', 'موريشيوسي', 'سلوفيني', 'تونسي', 'تشادي', 'يمني', 'التشيك', 'صومالي', 'غانا', 'جيبوتي', 'سريلانكي', 'بوروندي', 'أثيوبي', 'مالى', 'افغانستاني', 'إريترى', 'نيبالى', 'زيمبابوني', 'زامبي', 'جنوب أفريقي', 'واليس وفوتونا', 'تايلاندي', 'فانواتوني', 'فيتنامي', 'جزر العذراء الأمريكية', 'جزر العذراء البريطانية', 'فنزويلي', 'أوزبكي', 'أمريكي', 'أوغندي', 'أوكراني', 'تنزاني', 'تايواني', 'ترينيدادي', 'تركي', 'بورمي', 'موريتاني', 'مقدوني', 'أنغولاني', 'كونغي', 'إكوادوري', 'جزائري', 'دومينيكاني', 'دانماركي', 'ألماني', 'قبرصي', 'الرأس الأخضر', 'كوبي', 'كولومبي', 'صيني', 'كاميروني', 'شيلي', 'ساحل العاج', 'سويسري', 'إفريقي', 'إسباني', 'بوركيني', 'أرجنتيني', 'نمساوي', 'أسترالي', 'بوسني', 'بنغلادشي', 'بلجيكي', 'بلغاري', 'كونغي', 'بروناوي', 'بوليفي', 'برازيلي', 'باهامي', 'بوتسواني', 'كندي', 'كونغي', 'فنلندي', 'مدغشقري', 'إيطالي', 'يوغسلافي', 'مغربي', 'ليبي', 'ليبيري', 'سانت لوسيا', 'لبناني', 'كازاخستاني', 'كوري', 'نيفيسي', 'جزر القمر', 'كيني', 'ياباني', 'أردني', 'جامايكي', 'آيسلندي', 'فيجي', 'هونغ كونغي', 'فرنسي', 'غابوني', 'بريطاني', 'جرينلاندي', 'غيني', 'يوناني', 'هندوراسي', 'إيراني', 'كرواتي', 'إندونيسي', 'أيرلندي', 'فلسطيني', 'هندي', 'عراقي', 'مالديفي'],
-        ['Saudi', 'Emirati', 'Bahraini', 'Kuwaiti', 'Qatari', 'Omani', 'Egyptian', 'Singaporean', 'Swedish', 'Sudanese', 'Solomon Islander', 'Filipino', 'Russian', 'Serbian', 'Romanian', 'Portuguese', 'Puerto Rican', 'Polish', 'Pakistani', 'Peruvian', 'Papuan', 'Polynesian', 'Syrian', 'New Zealander', 'Norwegian', 'Dutch', 'Nigerian', 'Nigerien', 'Californian', 'Namibian', 'Mozambican', 'Malaysian', 'Mexican', 'Malawian', 'Mauritian', 'Slovenian', 'Tunisian', 'Chadian', 'Yemeni', 'Czech', 'Somali', 'Ghanaian', 'Djiboutian', 'Sri Lankan', 'Burundian', 'Ethiopian', 'Malian', 'Afghan', 'Eritrean', 'Nepali', 'Zimbabwean', 'Zambian', 'South African', 'Wallis and Futuna Islander', 'Thai', 'Vanuatuan', 'Vietnamese', 'American', 'British Virgin Islander', 'Virgin Islander', 'Venezuelan', 'Uzbek', 'American', 'Ugandan', 'Ukrainian', 'Tanzanian', 'Taiwanese', 'Trinidadian', 'Turkish', 'Burmese', 'Mauritanian', 'Macedonian', 'Angolan', 'Congolese', 'Ecuadorian', 'Algerian', 'Dominican', 'Danish', 'German', 'Cypriot', 'Cape Verdean', 'Cuban', 'Colombian', 'Chinese', 'Cameroonian', 'Chilean', 'Ivorian', 'Swiss', 'African', 'Spanish', 'Burkinabe', 'Argentinian', 'Austrian', 'Australian', 'Bosnian', 'Bangladeshi', 'Belgian', 'Bulgarian', 'Congolese', 'Bruneian', 'Bolivian', 'Brazilian', 'Bahamian', 'Motswana', 'Canadian', 'Congolese', 'Finnish', 'Malagasy', 'Italian', 'Yugoslavian', 'Moroccan', 'Libyan', 'Liberian', 'Saint Lucian', 'Lebanese', 'Kazakhstani', 'Korean', 'Nevisian', 'Comorian', 'Kenyan', 'Japanese', 'Jordanian', 'Jamaican', 'Icelandic', 'Fijian', 'Hong Konger', 'French', 'Gabonese', 'British', 'Greenlandic', 'Guinean', 'Greek', 'Honduran', 'Iranian', 'Croatian', 'Indonesian', 'Irish', 'Palestinian', 'Indian', 'Iraqi', 'Maldivian']
-    ];
+        'Saudi', 'Emirati', 'Bahraini', 'Kuwaiti', 'Qatari', 'Omani', 'Egyptian', 'Singaporean', 'Swedish', 'Sudanese', 'Solomon Islander', 'Filipino', 'Russian', 'Serbian', 'Romanian', 'Portuguese', 'Puerto Rican', 'Polish', 'Pakistani', 'Peruvian', 'Papuan', 'Polynesian', 'Syrian', 'New Zealander', 'Norwegian', 'Dutch', 'Nigerian', 'Nigerien', 'Californian', 'Namibian', 'Mozambican', 'Malaysian', 'Mexican', 'Malawian', 'Mauritian', 'Slovenian', 'Tunisian', 'Chadian', 'Yemeni', 'Czech', 'Somali', 'Ghanaian', 'Djiboutian', 'Sri Lankan', 'Burundian', 'Ethiopian', 'Malian', 'Afghan', 'Eritrean', 'Nepali', 'Zimbabwean', 'Zambian', 'South African', 'Wallis and Futuna Islander', 'Thai', 'Vanuatuan', 'Vietnamese', 'American', 'British Virgin Islander', 'Virgin Islander', 'Venezuelan', 'Uzbek', 'American', 'Ugandan', 'Ukrainian', 'Tanzanian', 'Taiwanese', 'Trinidadian', 'Turkish', 'Burmese', 'Mauritanian', 'Macedonian', 'Angolan', 'Congolese', 'Ecuadorian', 'Algerian', 'Dominican', 'Danish', 'German', 'Cypriot', 'Cape Verdean', 'Cuban', 'Colombian', 'Chinese', 'Cameroonian', 'Chilean', 'Ivorian', 'Swiss', 'African', 'Spanish', 'Burkinabe', 'Argentinian', 'Austrian', 'Australian', 'Bosnian', 'Bangladeshi', 'Belgian', 'Bulgarian', 'Congolese', 'Bruneian', 'Bolivian', 'Brazilian', 'Bahamian', 'Motswana', 'Canadian', 'Congolese', 'Finnish', 'Malagasy', 'Italian', 'Yugoslavian', 'Moroccan', 'Libyan', 'Liberian', 'Saint Lucian', 'Lebanese', 'Kazakhstani', 'Korean', 'Nevisian', 'Comorian', 'Kenyan', 'Japanese', 'Jordanian', 'Jamaican', 'Icelandic', 'Fijian', 'Hong Konger', 'French', 'Gabonese', 'British', 'Greenlandic', 'Guinean', 'Greek', 'Honduran', 'Iranian', 'Croatian', 'Indonesian', 'Irish', 'Palestinian', 'Indian', 'Iraqi', 'Maldivian'];
 
-    const countryOptions = [
-        ['المملكة العربية السعودية', 'الإمارات العربية المتحدة', 'البحرين', 'كويت', 'دولة قطر', 'عمان', 'مصر', 'سنغافورا', 'السويد', 'السودان', 'جزر سليمان', 'الفلبين', 'روسيا', 'صربيا', 'رومانيا', 'البرتغال', 'بورتوريكو', 'بولندا', 'باكستان', 'بيرو', 'بابوا غينيا الجديدة', 'بولينزيا الفرنسية', 'سوريا', 'نيوزيلاندا', 'النرويج', 'هولندا', 'نيجيريا', 'النيجر', 'كاليدونيا الجديدة', 'نامبيا', 'الموزنبيق', 'ماليزيا', 'المكسيك', 'مالاوي', 'موريشيوس', 'سلوفينيا', 'تونس', 'تشاد', 'اليمن', 'التشيك', 'صومال', 'غانا', 'جيبوتي', 'سريلانكا', 'جمهورية بوروندي', 'أثيوبيا', 'مالى', 'افغانستان', 'إريتريا', 'نيبال', 'زيمبابوي', 'زامبيا', 'جنوب أفريقيا', 'واليس وفوتونا', 'تايلاند', 'فانواتو', 'فيتنام', 'جزر العذراء الأمريكية', 'جزر العذراء البريطانية', 'فنزويلا', 'أوزباكستان', 'الولايات المتحدة الأمريكية', 'أوغندا', 'أوكرانيا', 'تنزانيا', 'تايوان', 'ترينيداد وتوباغو', 'تركيا', 'بورما', 'موريتانيا', 'مقدونيا', 'أنغولا', 'كونغو', 'إكوادور', 'الجزائر', 'جمهورية الدومينيكان', 'الدنمارك', 'ألمانيا', 'قبرص', 'الرأس الأخضر', 'كوبا', 'كولومبيا', 'الصين', 'كاميرون', 'تشيلي', 'ساحل العاج', 'سويسرا', 'جمهورية أفريقيا الوسطى', 'إسبانيا', 'بوركينا فاسو', 'الأرجنتين', 'النمسا', 'أستراليا', 'البوسنة والهوسك', 'بنغلاديش', 'بلجيكا', 'بلغاريا', 'جمهورية الكونغو الديمقراطية', 'بروناي', 'بوليفيا', 'البرازيل', 'باهاماس', 'بوتسوانا', 'كندا', 'كونغو', 'فنلندا', 'مدغشقر', 'إيطاليا', 'يوغسلافيا', 'المغرب', 'ليبيا', 'ليبيريا', 'سانت لوسيا', 'لبنان', 'كازاخستان', 'كوريا الجنوبية', 'نيفيس', 'جزر القمر', 'كينيا', 'اليابان', 'الأردن', 'جامايكا', 'آيسلندا', 'فيجي', 'هونغ كونغ', 'فرنسا', 'الغابون', 'بريطانيا', 'جرينلاند', 'غينيا', 'اليونان', 'هندوراس', 'إيران', 'كرواتيا', 'إندونيسيا', 'إيرلندا', 'فلسطين', 'الهند', 'العراق', 'جزر المالديف'],
-        ['Saudi Arabia', 'United Arab Emirates', 'Bahrain', 'Kuwait', 'Qatar', 'Oman', 'Egypt', 'Singapore', 'Sweden', 'Sudan', 'Solomon Islands', 'Philippines', 'Russia', 'Serbia', 'Romania', 'Portugal', 'Puerto Rico', 'Poland', 'Pakistan', 'Peru', 'Papua New Guinea', 'French Polynesia', 'Syria', 'New Zealand', 'Norway', 'Netherlands', 'Nigeria', 'Niger', 'New Caledonia', 'Namibia', 'Mozambique', 'Malaysia', 'Mexico', 'Malawi', 'Mauritius', 'Slovenia', 'Tunisia', 'Chad', 'Yemen', 'Czech Republic', 'Somalia', 'Ghana', 'Djibouti', 'Sri Lanka', 'Burundi', 'Ethiopia', 'Mali', 'Afghanistan', 'Eritrea', 'Nepal', 'Zimbabwe', 'Zambia', 'South Africa', 'Wallis and Futuna', 'Thailand', 'Vanuatu', 'Vietnam', 'US Virgin Islands', 'British Virgin Islands', 'Venezuela', 'Uzbekistan', 'United States of America', 'Uganda', 'Ukraine', 'Tanzania', 'Taiwan', 'Trinidad and Tobago', 'Turkey', 'Myanmar', 'Mauritania', 'Macedonia', 'Angola', 'Congo', 'Ecuador', 'Algeria', 'Dominican Republic', 'Denmark', 'Germany', 'Cyprus', 'Cape Verde', 'Cuba', 'Colombia', 'China', 'Cameroon', 'Chile', 'Ivory Coast', 'Switzerland', 'Central African Republic', 'Spain', 'Burkina Faso', 'Argentina', 'Austria', 'Australia', 'Bosnia and Herzegovina', 'Bangladesh', 'Belgium', 'Bulgaria', 'Democratic Republic of the Congo', 'Brunei', 'Bolivia', 'Brazil', 'Bahamas', 'Botswana', 'Canada', 'Congo', 'Finland', 'Madagascar', 'Italy', 'Yugoslavia', 'Morocco', 'Libya', 'Liberia', 'Saint Lucia', 'Lebanon', 'Kazakhstan', 'South Korea', 'Saint Kitts and Nevis', 'Comoros', 'Kenya', 'Japan', 'Jordan', 'Jamaica', 'Iceland', 'Fiji', 'Hong Kong', 'France', 'Gabon', 'Britain', 'Greenland', 'Guinea', 'Greece', 'Honduras', 'Iran', 'Croatia', 'Indonesia', 'Ireland', 'Palestine', 'India', 'Iraq', 'Maldives']
-    ];
+    const countryOptions = ['Saudi Arabia', 'United Arab Emirates', 'Bahrain', 'Kuwait', 'Qatar', 'Oman', 'Egypt', 'Singapore', 'Sweden', 'Sudan', 'Solomon Islands', 'Philippines', 'Russia', 'Serbia', 'Romania', 'Portugal', 'Puerto Rico', 'Poland', 'Pakistan', 'Peru', 'Papua New Guinea', 'French Polynesia', 'Syria', 'New Zealand', 'Norway', 'Netherlands', 'Nigeria', 'Niger', 'New Caledonia', 'Namibia', 'Mozambique', 'Malaysia', 'Mexico', 'Malawi', 'Mauritius', 'Slovenia', 'Tunisia', 'Chad', 'Yemen', 'Czech Republic', 'Somalia', 'Ghana', 'Djibouti', 'Sri Lanka', 'Burundi', 'Ethiopia', 'Mali', 'Afghanistan', 'Eritrea', 'Nepal', 'Zimbabwe', 'Zambia', 'South Africa', 'Wallis and Futuna', 'Thailand', 'Vanuatu', 'Vietnam', 'US Virgin Islands', 'British Virgin Islands', 'Venezuela', 'Uzbekistan', 'United States of America', 'Uganda', 'Ukraine', 'Tanzania', 'Taiwan', 'Trinidad and Tobago', 'Turkey', 'Myanmar', 'Mauritania', 'Macedonia', 'Angola', 'Congo', 'Ecuador', 'Algeria', 'Dominican Republic', 'Denmark', 'Germany', 'Cyprus', 'Cape Verde', 'Cuba', 'Colombia', 'China', 'Cameroon', 'Chile', 'Ivory Coast', 'Switzerland', 'Central African Republic', 'Spain', 'Burkina Faso', 'Argentina', 'Austria', 'Australia', 'Bosnia and Herzegovina', 'Bangladesh', 'Belgium', 'Bulgaria', 'Democratic Republic of the Congo', 'Brunei', 'Bolivia', 'Brazil', 'Bahamas', 'Botswana', 'Canada', 'Congo', 'Finland', 'Madagascar', 'Italy', 'Yugoslavia', 'Morocco', 'Libya', 'Liberia', 'Saint Lucia', 'Lebanon', 'Kazakhstan', 'South Korea', 'Saint Kitts and Nevis', 'Comoros', 'Kenya', 'Japan', 'Jordan', 'Jamaica', 'Iceland', 'Fiji', 'Hong Kong', 'France', 'Gabon', 'Britain', 'Greenland', 'Guinea', 'Greece', 'Honduras', 'Iran', 'Croatia', 'Indonesia', 'Ireland', 'Palestine', 'India', 'Iraq', 'Maldives'];
     // const countryCodeOptions = ['+966', '+973', '+965', '+974', '+968', '+20', '+65', '+46', '+249', '+677', '+63', '+7', '+381', '+40', '+351', '+1 939', '+48', '+92', '+51', '+675', '+689', '+963', '+64', '+47', '+31', '+234', '+227', '+687', '+264', '+258', '+60', '+52', '+265', '+230', '+386', '+216', '+235', '+967', '+420', '+252', '+233', '+253', '+94', '+257', '+251', '+223', '+93', '+977', '+977', '+263', '+260', '+27', '+681', '+66', '+678', '+84', '+58', '+998', '+256', '+380', '+255', '+886', '+1 868', '+90', '+95', '+222', '+389', '+244', '+242', '+593', '+213', '+45', '+49', '+537', '+238', '+53', '+57', '+86', '+237', '+56', '+225', '+41', '+34', '+226', '+54', '+43', '+61', '+387', '+880', '+32', '+359', '+673', '+591'];
 
 
@@ -54,13 +47,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 lastName: document.getElementById('lastName').value,
                 email: document.getElementById('email').value,
                 dayBirthdate: document.getElementById('dayBirthdate').value,
-                monthBirthdate: monthOptions[0][monthOptions[1].indexOf(document.getElementById('monthBirthdate').value)] ,
+                monthBirthdate: document.getElementById('monthBirthdate').value ,
                 yearBirthdate: document.getElementById('yearBirthdate').value,
-                nationality: nationalityOptions[0][nationalityOptions[1].indexOf(document.getElementById('nationality').value)],
-                country: countryOptions[0][countryOptions[1].indexOf(document.getElementById('country').value)],
+                nationality: document.getElementById('nationality').value,
+                country: document.getElementById('country').value,
                 passportNumber: document.getElementById('passportNumber').value,
                 dayPassportExpDate: document.getElementById('dayPassportExpDate').value,
-                monthPassportExpDate: monthOptions[0][monthOptions[1].indexOf(document.getElementById('monthPassportExpDate').value)],
+                monthPassportExpDate: document.getElementById('monthPassportExpDate').value,
                 yearPassportExpDate: document.getElementById('yearPassportExpDate').value,
                 phoneNumber: document.getElementById('phoneNumber').value
                 // countryCode: document.getElementById('countryCode').value
@@ -141,9 +134,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const dayDropdown = createDropdownList(dayOptions);
             dayDropdown.id = 'dayBirthdate';
-            const monthDropdown = createDropdownList(monthOptions[1]);
+            const monthDropdown = createDropdownList(monthOptions);
             monthDropdown.id = 'monthBirthdate';
-            monthDropdown.value = monthOptions[1][0];
+            monthDropdown.value = monthOptions[0];
 
             const yearDropdown = createDropdownList(yearOptions);
             yearDropdown.id = 'yearBirthdate';
@@ -152,10 +145,10 @@ document.addEventListener('DOMContentLoaded', function() {
             yearDropdown.value = yearOptions[89]; // 2000 is the default year
             ////////////////////////////////////////////
 
-            const nationalityDropdown = createDropdownList(nationalityOptions[1]);
+            const nationalityDropdown = createDropdownList(nationalityOptions);
             nationalityDropdown.id = 'nationality';
 
-            const countryDropdown = createDropdownList(countryOptions[1]);
+            const countryDropdown = createDropdownList(countryOptions);
             countryDropdown.id = 'country';
 
             const passportNumberInput = document.createElement('input');
@@ -165,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const passportDayDropdown = createDropdownList(dayOptions);
             passportDayDropdown.id = 'dayPassportExpDate';
-            const passportMonthDropdown = createDropdownList(monthOptions[1]);
+            const passportMonthDropdown = createDropdownList(monthOptions);
             passportMonthDropdown.id = 'monthPassportExpDate';
             const passportYearDropdown = createDropdownList(yearOptions2);
             passportYearDropdown.id = 'yearPassportExpDate';
@@ -432,7 +425,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     let size = elements.length;
                     let i = size - 1;
                     for (const element of elements) {
-                        if (element.innerHTML.includes(person[property])) {
+                        if (element.innerHTML.toLowerCase().includes(person[property].toLowerCase())) {
                             element.click(); // Select the option
                             break; // Exit the loop after selecting the option
                         }
@@ -510,18 +503,7 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 0; i < IDs.length; i++) {
             try {
                 let input = document.getElementById(IDs[i]);
-                if (IDs[i] === 'monthBirthdate' || IDs[i] === 'monthPassportExpDate') {
-                    input.value = monthOptions[1][monthOptions[0].indexOf(person[IDs[i]])];
-                }
-                else if (IDs[i] === 'country'){
-                    input.value = countryOptions[1][countryOptions[0].indexOf(person[IDs[i]])];
-                }
-                else if (IDs[i] === 'nationality'){
-                    input.value = nationalityOptions[1][nationalityOptions[0].indexOf(person[IDs[i]])];
-                }
-                else {
-                    input.value = person[IDs[i]];
-                }
+                input.value = person[IDs[i]];
             } catch (e) {
                 console.log(e);
             }
