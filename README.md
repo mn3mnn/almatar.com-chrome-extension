@@ -2,7 +2,7 @@
 This extension is for almatar.com, with this extension you can quickly add a new person by filling out their information, such as name and date of birth, and save their data for future use.
 
 
-The extension simplifies the process of filling out forms. It provides a convenient way to add new persons, save their information, and easily fill out forms for **the flights' section** on almatar.com with the saved data.
+The extension speeds up the process of filling out forms. It provides a convenient way to add new persons, save their information, and easily fill out forms for **the flights' section** on almatar.com with the saved data.
 
 - **Features**
   - Add a new person by entering their details such as name and date of birth.
